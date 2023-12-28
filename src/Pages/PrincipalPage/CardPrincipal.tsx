@@ -1,40 +1,44 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {memo, useMemo, useRef} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {primary} from '../../../paletteColors.json';
-import {useGetList} from '../../Services/Query';
-import {IZodialSings} from '../../Services/interfaces';
 import Video from 'react-native-video';
+import {useSelector} from 'react-redux';
+import {IVideo} from '../../Services/interfaces';
+import {RootState} from '../../Redux/store';
 
 const CardPrincipal: React.FC = () => {
   const videoRef = useRef<Video>(null);
 
-  //-- Get List Horoscopo --/
-  const {data} = useGetList();
+  const videos = useSelector<RootState, IVideo>(state => state.video);
 
-  const horoscopoToday = useMemo<IZodialSings | null>(() => {
-    if (!data) {
-      return null;
-    }
-    return data.zodiac_signs[0];
-  }, [data]);
+  // const arrSings = useSelector<RootState, IDataHoroscopo>(
+  //   state => state.horoscopo,
+  // );
+
+  // const horoscopoToday = useMemo<IZodialSings | null>(() => {
+  //   if (!data) {
+  //     return null;
+  //   }
+  //   return data.zodiac_signs[0];
+  // }, [data]);
 
   const video = useMemo<string | undefined>(() => {
-    if (!data) {
+    if (!videos) {
       return undefined;
     }
-    return data.videos[0].url;
-  }, [data]);
+    return videos.url;
+  }, [videos]);
 
-  const signo = useMemo<string>(
-    () => horoscopoToday?.name || '',
-    [horoscopoToday?.name],
-  );
+  // const signo = useMemo<string>(
+  //   () => horoscopoToday?.name || '',
+  //   [horoscopoToday?.name],
+  // );
 
-  const prediction = useMemo<string>(
-    () => horoscopoToday?.prediction || '',
-    [horoscopoToday?.prediction],
-  );
+  // const prediction = useMemo<string>(
+  //   () => horoscopoToday?.prediction || '',
+  //   [horoscopoToday?.prediction],
+  // );
 
   return (
     <View style={styles.container}>
@@ -48,11 +52,11 @@ const CardPrincipal: React.FC = () => {
             />
           </View>
           <View style={[styles.subContainerTitle, {width: '60%'}]}>
-            <Text style={styles.textTitle}>{signo}</Text>
+            {/* <Text style={styles.textTitle}>{signo}</Text> */}
           </View>
         </View>
         <View>
-          <Text style={styles.containerPredictin}>{prediction}</Text>
+          {/* <Text style={styles.containerPredictin}>{prediction}</Text> */}
         </View>
       </View>
     </View>

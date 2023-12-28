@@ -1,16 +1,20 @@
 import React, {ReactElement, memo, useCallback, useMemo} from 'react';
 import {FlatList, ListRenderItemInfo, StyleSheet, View} from 'react-native';
-import {useGetList} from '../../Services/Query';
 import {IZodialSings, TZodialSings} from '../../Services/interfaces';
 import CardListVertical from './CardListVertical';
+import {useSelector} from 'react-redux';
+import {RootState} from '../../Redux/store';
 
 const List: React.FC = () => {
-  const {data} = useGetList();
+  const data = useSelector<RootState, TZodialSings>(
+    state => state.horoscopo.zodiac_signs,
+  );
+
   const arrayList = useMemo<TZodialSings>(() => {
     if (!data) {
       return [];
     }
-    return data.zodiac_signs;
+    return data;
   }, [data]);
 
   const renderItem = useCallback(

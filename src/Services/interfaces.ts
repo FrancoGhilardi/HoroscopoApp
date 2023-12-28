@@ -5,8 +5,12 @@ export interface IHoroscopo {
   videos: TVideos;
 }
 
+export interface IDataHoroscopo {
+  zodiac_signs: TZodialSings;
+}
+
 export type TZodialSings = IZodialSings[];
-type TVideos = IVideo[];
+export type TVideos = IVideo[];
 
 export interface IZodialSings {
   id: number;

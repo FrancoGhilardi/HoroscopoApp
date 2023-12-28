@@ -1,6 +1,6 @@
 import {configureStore} from '@reduxjs/toolkit';
 import horoscopoReducer from './Slice/horoscopoSlice';
-import videoReducer from './Slice/horoscopoSlice';
+import videoReducer from './Slice/videoSlice';
 
 export const store = configureStore({
   reducer: {
@@ -8,3 +8,6 @@ export const store = configureStore({
     video: videoReducer,
   },
 });
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
