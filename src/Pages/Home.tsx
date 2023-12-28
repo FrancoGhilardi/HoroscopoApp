@@ -1,27 +1,15 @@
-import React, {memo, useEffect} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import {useGetList} from '../Services/Query';
+import React, {memo} from 'react';
+import {StyleSheet} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {primary} from '../../paletteColors.json';
-import {useDispatch} from 'react-redux';
-import {addHoroscopo} from '../Redux/Slice/horoscopoSlice';
+import CardPrincipal from './PrincipalPage/CardPrincipal';
+import List from './PrincipalPage/List';
 
 const Home: React.FC = () => {
-  const dispatch = useDispatch();
-
-  //-- Get List Horoscopo --/
-  const {data} = useGetList();
-
-  useEffect(() => {
-    dispatch(addHoroscopo(data));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data]);
-
   return (
     <SafeAreaView style={styles.contianer}>
-      <View>
-        <Text style={styles.text}>a</Text>
-      </View>
+      <CardPrincipal />
+      <List />
     </SafeAreaView>
   );
 };
@@ -32,5 +20,4 @@ const styles = StyleSheet.create({
     backgroundColor: primary.black,
     flex: 1,
   },
-  text: {color: primary.text},
 });

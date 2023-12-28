@@ -5,7 +5,7 @@ export interface IHoroscopo {
   videos: TVideos;
 }
 
-type TZodialSings = IZodialSings[];
+export type TZodialSings = IZodialSings[];
 type TVideos = IVideo[];
 
 export interface IZodialSings {
@@ -17,7 +17,7 @@ export interface IZodialSings {
   image: string;
 }
 
-interface IVideo {
+export interface IVideo {
   id: number;
   url: string;
 }

@@ -1,4 +1,4 @@
-import {createSlice} from '@reduxjs/toolkit';
+import {PayloadAction, createSlice} from '@reduxjs/toolkit';
 import {IZodialSings} from '../../Services/interfaces';
 
 const initialState: IZodialSings = {
@@ -14,7 +14,7 @@ export const horoscopoSlice = createSlice({
   name: 'horoscopo',
   initialState,
   reducers: {
-    addHoroscopo: (state, action) => {
+    addHoroscopo: (state, action: PayloadAction<IZodialSings>) => {
       const data = action.payload;
       state.id = data.id;
       state.end_date = data.end_date;
