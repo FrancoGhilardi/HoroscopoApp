@@ -1,10 +1,10 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {memo, useMemo, useRef} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import {primary} from '../../../paletteColors.json';
 import Video from 'react-native-video';
 import {useSelector} from 'react-redux';
-import {IVideo} from '../../Services/interfaces';
+import {IVideo, IZodialSings} from '../../Services/interfaces';
 import {RootState} from '../../Redux/store';
 
 const CardPrincipal: React.FC = () => {
@@ -12,16 +12,9 @@ const CardPrincipal: React.FC = () => {
 
   const videos = useSelector<RootState, IVideo>(state => state.video);
 
-  // const arrSings = useSelector<RootState, IDataHoroscopo>(
-  //   state => state.horoscopo,
-  // );
-
-  // const horoscopoToday = useMemo<IZodialSings | null>(() => {
-  //   if (!data) {
-  //     return null;
-  //   }
-  //   return data.zodiac_signs[0];
-  // }, [data]);
+  const horoscopoToday = useSelector<RootState, IZodialSings | null>(
+    state => state.itemSelecter.itemSelected,
+  );
 
   const video = useMemo<string | undefined>(() => {
     if (!videos) {
@@ -30,15 +23,15 @@ const CardPrincipal: React.FC = () => {
     return videos.url;
   }, [videos]);
 
-  // const signo = useMemo<string>(
-  //   () => horoscopoToday?.name || '',
-  //   [horoscopoToday?.name],
-  // );
+  const signo = useMemo<string>(
+    () => horoscopoToday?.name || '',
+    [horoscopoToday?.name],
+  );
 
-  // const prediction = useMemo<string>(
-  //   () => horoscopoToday?.prediction || '',
-  //   [horoscopoToday?.prediction],
-  // );
+  const prediction = useMemo<string>(
+    () => horoscopoToday?.prediction || '',
+    [horoscopoToday?.prediction],
+  );
 
   return (
     <View style={styles.container}>
@@ -49,14 +42,15 @@ const CardPrincipal: React.FC = () => {
               source={{uri: video}}
               ref={videoRef}
               style={styles.backgroundVideo}
+              repeat={true}
             />
           </View>
           <View style={[styles.subContainerTitle, {width: '60%'}]}>
-            {/* <Text style={styles.textTitle}>{signo}</Text> */}
+            <Text style={styles.textTitle}>{signo}</Text>
           </View>
         </View>
-        <View>
-          {/* <Text style={styles.containerPredictin}>{prediction}</Text> */}
+        <View style={styles.containerPrediction}>
+          <Text style={styles.textPrediction}>{prediction}</Text>
         </View>
       </View>
     </View>
@@ -68,7 +62,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: primary.purple,
     height: '50%',
-    margin: '3%',
+    margin: 10,
     borderRadius: 20,
     justifyContent: 'center',
     alignItems: 'center',
@@ -88,11 +82,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   textTitle: {color: primary.text, fontSize: 32, fontWeight: 'bold'},
-  containerPredictin: {
-    height: '70%',
+  containerPrediction: {marginTop: '2%'},
+  textPrediction: {
     textAlignVertical: 'center',
     color: primary.text,
     fontSize: 15,
+    flexShrink: 1,
   },
   backgroundVideo: {
     position: 'absolute',

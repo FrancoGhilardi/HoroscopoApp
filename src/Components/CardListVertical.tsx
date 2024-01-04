@@ -1,13 +1,16 @@
-import React, {memo, useMemo} from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
-import {IZodialSings} from '../../Services/interfaces';
-import {primary} from '../../../paletteColors.json';
+import React, {memo, useCallback, useMemo} from 'react';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {IZodialSings} from '../Services/interfaces';
+import {primary} from '../../paletteColors.json';
+import {useDispatch} from 'react-redux';
+import {addItemSelected} from '../Redux/Slice/itemSelectedSlice';
 
 interface ICardListVertical {
   row: IZodialSings;
 }
 
 const CardListVertical: React.FC<ICardListVertical> = ({row}) => {
+  const dispatch = useDispatch();
   const name = useMemo<string>(() => row.name || '', [row.name]);
 
   const prediction = useMemo<string>(
@@ -15,10 +18,18 @@ const CardListVertical: React.FC<ICardListVertical> = ({row}) => {
     [row.prediction],
   );
 
-  const image = useMemo<string>(() => row.image || '', [row.image]);
+  const image = useMemo<string | undefined>(
+    () => row.image || undefined,
+    [row.image],
+  );
+
+  const handleSelectedItem = useCallback(
+    () => dispatch(addItemSelected(row)),
+    [dispatch, row],
+  );
 
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={handleSelectedItem}>
       <View style={styles.subContainer}>
         <View style={styles.containerImage}>
           <Image style={styles.logo} source={{uri: image}} />
@@ -30,7 +41,7 @@ const CardListVertical: React.FC<ICardListVertical> = ({row}) => {
           </Text>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

@@ -12,6 +12,9 @@ export interface IDataHoroscopo {
 export type TZodialSings = IZodialSings[];
 export type TVideos = IVideo[];
 
+export interface IItemSelected {
+  itemSelected: IZodialSings | null;
+}
 export interface IZodialSings {
   id: number;
   name: string;
@@ -32,4 +35,8 @@ export interface IHookGet {
   refetch: (
     options?: RefetchOptions | undefined,
   ) => Promise<QueryObserverResult<IHoroscopo, Error>>;
+}
+
+export interface IPositionScroll {
+  horizontal: boolean;
 }

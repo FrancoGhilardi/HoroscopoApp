@@ -1,8 +1,24 @@
+# Versiones
+
+```bash
+# Node
+ v18.17.0.
+# npm
+ v9.6.7
+```
+
+# Aclaraciones adicionales
+
+- Se utilizo **react-native-safe-area-context** y **react-native-safe-area-view** para el manejo de las utilizables en las distintas pantallas
+- Se utilizo **reduxjs/toolkit** para el manejo de estados globales dentro de la aplicacion
+- Se utilizo **tanstack/react-query** junto con **axios** para manejo de las consultas a la API, la cual quedo configurada para ser escalada en un futuro en caso de ser nescesario, creando una instancia de axios generica.
+- No se decidio usar variables de entorno ya que solo llama a una sola url, en caso de necesitar ocultar la url base utilizada en la instancia de axios se agregará.
+
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
 # Getting Started
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+> **Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
 
 ## Step 1: Start the Metro Server
 
